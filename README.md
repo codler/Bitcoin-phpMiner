@@ -5,6 +5,8 @@ phpMiner uses CPU and it is slower than normal CPU miner. I didn't know it until
 Run test.php for testcase.
 Look in work.php for example how to use.
 
+The proxy.php should have URI "/"
+
 I am open for improvements and feedback.
 
 ## Donate

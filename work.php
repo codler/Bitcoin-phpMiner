@@ -37,6 +37,6 @@ $miner->run();
 If you want to mine on bitp.it
 */
 # Parameters: ClientID and Domain
-#$miner = new BitpitMiner(4384, 'zencodez.net');
-#$miner->run();
+$miner = new BitpitMiner(4384, 'zencodez.net');
+$miner->run();
 ?>

@@ -170,7 +170,7 @@ class Miner {
 			
 			$end_time = microtime(true);
 
-			$this->hash_rate = ($nonce - $first_nonce) / ($end_time - $start_time);
+			$this->hash_rate = ($nonce - $first_nonce) / ($end_time - $start_time) * 1000;
 			$this->hash_count = $this->hash_rate * $check_interval;
 			
 			
