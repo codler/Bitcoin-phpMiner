@@ -1,10 +1,10 @@
 <?php 
 /**
  * @author Han Lin Yap < http://zencodez.net/ >
- * @copyright 2011 zencodez.net
+ * @copyright 2013 zencodez.net
  * @license http://creativecommons.org/licenses/by-sa/3.0/
  * @package Miner
- * @version 1.0 - 2011-06-18
+ * @version 1.0.1 - 2013-08-04
  *
  * Feel free to donate: 1NibBDZPvJCm568CZMnJUBJoPyUhW7aSag
  */
@@ -79,7 +79,7 @@ class Miner {
 		if ($raw->error) {
 			throw new Exception('curl:' . $raw->error);
 		}
-		echo $raw->source; die();
+		//echo $raw->source; die();
 		return $raw->source;
 	}
 	
@@ -118,9 +118,9 @@ class Miner {
 			}
 			$this->nonce++;
 			
-			#if ($nonce % 100 == 0) {
-			#	echo '|' . $nonce . '|';
-			#	if ($nonce % 1000 === 0) echo '<br>';
+			#if ($this->nonce % 100 == 0) {
+			#	echo '|' . $this->nonce . '|';
+			#	if ($this->nonce % 1000 === 0) echo '<br>';
 			#	ob_flush();
 			#	flush();
 			#}
@@ -172,7 +172,6 @@ class Miner {
 
 			$this->hash_rate = ($nonce - $first_nonce) / ($end_time - $start_time) * 1000;
 			$this->hash_count = $this->hash_rate * $check_interval;
-			
 			
 			$runtime = intval($keep_alive - (microtime(true) - $eta));
 			sleep(intval($runtime % $sleep));

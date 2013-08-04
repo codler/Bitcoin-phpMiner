@@ -1,10 +1,10 @@
 <?php
 /**
  * @author Han Lin Yap < http://zencodez.net/ >
- * @copyright 2011 zencodez.net
+ * @copyright 2013 zencodez.net
  * @license http://creativecommons.org/licenses/by-sa/3.0/
- * @package Sha256
- * @version 1.0 - 2011-06-18
+ * @package Miner
+ * @version 1.0.1 - 2013-08-04
  *
  * Feel free to donate: 1NibBDZPvJCm568CZMnJUBJoPyUhW7aSag
  */
@@ -19,19 +19,19 @@ class Sha256 {
 		0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
 		0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2);
 
-	function rotr($x, $n) {
+	static function rotr($x, $n) {
 		return Util::zerofill($x, $n) | Util::uint32_left_shift($x, 32-$n);
 	}
-	function shr($x, $n) {
+	static function shr($x, $n) {
 		return Util::zerofill($x, $n);
 	}
-	function add($x, $y) {
+	static function add($x, $y) {
 		$lsw = ($x & 65535) + ($y & 65535);
 		$msw = ($x >> 16) + ($y >> 16) + ($lsw >> 16);
 		return Util::uint32_left_shift($msw, 16) | $lsw & 65535;
 	}
 
-	function extend_work($data) {
+	static function extend_work($data) {
 		$w = $data;
 		for($i = 16; $i < 64; $i++) {
 			$s0 = self::rotr($w[$i - 15], 7) ^ self::rotr($w[$i - 15], 18) ^ self::shr($w[$i - 15], 3);
@@ -47,7 +47,7 @@ class Sha256 {
 		return $w;
 	}
 	
-	function hash($midstate, $data=null) {
+	static function hash($midstate, $data=null) {
 		// Remapping if data is null
 		if ($data === null) {
 			$data = $midstate;
